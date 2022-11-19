@@ -1,4 +1,4 @@
-/* ОТРАБОТКА МАССИВОВ
+package main.java.com.apaliakou.javacore;/* ОТРАБОТКА МАССИВОВ
  */
 import java.util.Arrays;
 public class OneMeasureArray {
@@ -11,8 +11,7 @@ public class OneMeasureArray {
         System.out.println(Arrays.toString(array));
         int sequence = Arrays.binarySearch(array, 3);
         System.out.println(array [3]);
-        int [][] bigarray = { {356, 75, 12} , {674, 35, 17} }; // создал двумерный массив для отработки его
-        // отображения в один ряд через символ
+        int [][] bigarray = { {356, 75, 12} , {674, 35, 17} }; // создал двумерный массив для отработки его отображения в один ряд через символ
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 System.out.print((bigarray [i] [j] + " | "));}
