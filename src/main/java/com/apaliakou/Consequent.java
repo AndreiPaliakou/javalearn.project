@@ -15,6 +15,7 @@ class Consequent {
 
             switch (loopType) {
                 case 1: {
+                    displayInformationUtil.displayLoopType(1);
                     if (functionArgument <= 2) {
                         System.out.println("Error!!! Enter args [2] = 3 or more !!!");
                         break;
@@ -23,6 +24,7 @@ class Consequent {
                     break;
                 }
                 case 2: {
+                    displayInformationUtil.displayLoopType(2);
                     if (functionArgument <= 2) {
                         System.out.println("Error!!! Enter args [2] = 3 or more !!!");
                         break;
@@ -31,6 +33,7 @@ class Consequent {
                     break;
                 }
                 case 3: {
+                    displayInformationUtil.displayLoopType(3);
                     if (functionArgument <= 2) {
                         System.out.println("Error!!! Enter args [2] = 3 or more !!!");
                         break;
@@ -41,8 +44,10 @@ class Consequent {
             }
         } else if (functionType == 2) {
             displayInformationUtil.displayFunctionType(2);
+
             switch (loopType) {
                 case 1: {
+                    displayInformationUtil.displayLoopType(1);
                     if (functionArgument < 0) {
                         System.out.println("Error!!! This is not a positive integer!!! Enter a positive args [2]!!!");
                         break;
@@ -54,6 +59,7 @@ class Consequent {
                     break;
                 }
                 case 2: {
+                    displayInformationUtil.displayLoopType(2);
                     if (functionArgument < 0) {
                         System.out.println("Error!!! This is not a positive integer!!! Enter a positive args [2]!!!");
                         break;
@@ -66,6 +72,7 @@ class Consequent {
                 }
 
                 case 3: {
+                    displayInformationUtil.displayLoopType(3);
                     if (functionArgument < 0) {
                         System.out.println("Error!!! This is not a positive integer!!! Enter a positive args [2]!!!");
                         break;
@@ -81,7 +88,6 @@ class Consequent {
     }
 
     private static void displayFibonachiWithWhileLoop(DisplayInformationUtil displayInformationUtil, int functionArgument) {
-        displayInformationUtil.displayLoopType(1);
         System.out.println();
         System.out.println("Количество элементов последовательности Фибоначчи: " + functionArgument + ".\n");
         System.out.print("Ряд элементов: 0   1   ");
@@ -97,7 +103,6 @@ class Consequent {
     }
 
     private static void displayFibonachiWithDoWhileLoop(DisplayInformationUtil displayInformationUtil, int functionArgument) {
-        displayInformationUtil.displayLoopType(2);
         System.out.println();
         System.out.println("Количество элементов последовательности Фибоначчи: " + functionArgument + ".\n");
         System.out.print("Ряд элементов: 0   1   ");
@@ -113,7 +118,6 @@ class Consequent {
     }
 
     private static void displayFibonachiWithForLoop(DisplayInformationUtil displayInformationUtil, int functionArgument) {
-        displayInformationUtil.displayLoopType(3);
         System.out.println();
         System.out.println("Количество элементов последовательности Фибоначчи: " + functionArgument + ".\n");
         System.out.print("Ряд элементов: ");
@@ -130,7 +134,6 @@ class Consequent {
     }
 
     private static void displayFactorialWithWhileLoop(DisplayInformationUtil displayInformationUtil, int functionArgument) {
-        displayInformationUtil.displayLoopType(1);
         System.out.println();
         System.out.println("Колич-во натур. чисел с единицы для расчета факториала: " + functionArgument + ".\n");
         System.out.print("Значение факториала числа " + functionArgument + ": ");
@@ -144,7 +147,6 @@ class Consequent {
     }
 
     private static void displayFactorialWithDoWhileLoop(DisplayInformationUtil displayInformationUtil, int functionArgument) {
-        displayInformationUtil.displayLoopType(2);
         System.out.println();
         System.out.println("Колич-во натур. чисел с единицы для расчета факториала: " + functionArgument + ".\n");
         System.out.print("Значение факториала числа " + functionArgument + ": ");
@@ -158,7 +160,6 @@ class Consequent {
     }
 
     private static void displayFactorialWithForLoop(DisplayInformationUtil displayInformationUtil, int functionArgument) {
-        displayInformationUtil.displayLoopType(3);
         System.out.println();
         System.out.println("Колич-во натур. чисел с единицы для расчета факториала: " + functionArgument + ".\n");
         System.out.print("Значение факториала числа " + functionArgument + ": ");
