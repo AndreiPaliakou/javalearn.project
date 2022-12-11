@@ -10,41 +10,29 @@ class Consequent {
         int loopType = Integer.parseInt(args[1]);
         int functionArgument = Integer.parseInt(args[2]);
 
-        int factorial;
-        int counter;
-
         if (functionType == 1) {
             displayInformationUtil.displayFunctionType(1);
 
             switch (loopType) {
                 case 1: {
-                    if (functionArgument < 0) {
-                        System.out.println("Error!!! This is not a positive integer!!! Enter a positive args [2]!!!");
-                        break;
-                    } else if (functionArgument == 0) {
-                        System.out.println("Error!!! Enter args [2] = 1 or more !!!");
+                    if (functionArgument <= 2) {
+                        System.out.println("Error!!! Enter args [2] = 3 or more !!!");
                         break;
                     }
                     displayFibonachiWithWhileLoop(displayInformationUtil, functionArgument);
                     break;
                 }
                 case 2: {
-                    if (functionArgument < 0) {
-                        System.out.println("Error!!! This is not a positive integer!!! Enter a positive args [2]!!!");
-                        break;
-                    } else if (functionArgument == 0) {
-                        System.out.println("Error!!! Enter args [2] = 1 or more !!!");
+                    if (functionArgument <= 2) {
+                        System.out.println("Error!!! Enter args [2] = 3 or more !!!");
                         break;
                     }
                     displayFibonachiWithDoWhileLoop(displayInformationUtil, functionArgument);
                     break;
                 }
                 case 3: {
-                    if (functionArgument < 0) {
-                        System.out.println("Error!!! This is not a positive integer!!! Enter a positive args [2]!!!");
-                        break;
-                    } else if (functionArgument == 0) {
-                        System.out.println("Error!!! Enter args [2] = 1 or more !!!");
+                    if (functionArgument <= 2) {
+                        System.out.println("Error!!! Enter args [2] = 3 or more !!!");
                         break;
                     }
                     displayFibonachiWithForLoop(displayInformationUtil, functionArgument);
