@@ -1,3 +1,5 @@
+package main.java.com.apaliakou.homework03.median;
+
 public class Median {
     private Median() {
     }

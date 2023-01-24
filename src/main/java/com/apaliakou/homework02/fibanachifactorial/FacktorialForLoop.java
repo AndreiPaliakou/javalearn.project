@@ -1,4 +1,4 @@
-package com.apaliakou.calculator;
+package main.java.com.apaliakou.homework02.fibanachifactorial;
 
 public class FacktorialForLoop implements Facktorial {
 

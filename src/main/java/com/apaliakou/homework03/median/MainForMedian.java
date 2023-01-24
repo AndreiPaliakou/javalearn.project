@@ -1,3 +1,5 @@
+package main.java.com.apaliakou.homework03.median;
+
 import java.util.Arrays;
 
 public class MainForMedian {
@@ -8,8 +10,9 @@ public class MainForMedian {
         System.out.println(Arrays.toString(doubleValues));
 
         int medianResult = Median.median(integerValues);
-
+        double medianResult2 = Median.median(doubleValues);
         System.out.println(medianResult);
+        System.out.println(medianResult2);
 
     }
 }
