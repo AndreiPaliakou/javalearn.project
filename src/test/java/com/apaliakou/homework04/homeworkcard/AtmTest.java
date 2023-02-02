@@ -4,7 +4,7 @@ import com.apaliakou.homework04.homeworkcard.card.Card;
 import com.apaliakou.homework04.homeworkcard.card.impl.DebitCard;
 import com.apaliakou.homework04.homeworkcard.card.impl.CreditCard;
 import com.apaliakou.homework04.homeworkcard.exception.NegativeBalanceAfterWithdrawingException;
-import com.apaliakou.homework04.homeworkcard.exception.NegativeSumInputException;
+import com.apaliakou.homework04.homeworkcard.exception.NegativeInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
@@ -16,7 +16,7 @@ class AtmTest {
     private Card megaVisaGold;
 
     @BeforeEach
-    void constructor_FillingInSimulation() {
+    void create_TestObjects() {
         superVisaGold = new CreditCard("John", BigDecimal.valueOf(1000));
         megaVisaGold = new DebitCard("Denny", BigDecimal.valueOf(2000));
     }
@@ -73,9 +73,9 @@ class AtmTest {
     void withdrawCreditCard_NegativeSumInput_Exception() {
         // given
         BigDecimal withdrawSumForCreditCard = BigDecimal.valueOf(-1000);
-        String expectedMessage = "It was a negative sum value!!!";
+        String expectedMessage = "It was a negative input value!!!";
         // when
-        Exception exception = assertThrows(NegativeSumInputException.class, () -> {
+        Exception exception = assertThrows(NegativeInputException.class, () -> {
             superVisaGold.withdrawBalance(withdrawSumForCreditCard);
         });
         String actualMessage = exception.getMessage();
@@ -87,9 +87,9 @@ class AtmTest {
     void withdrawDebitCard_NegativeSumInput_Exception() {
         // given
         BigDecimal withdrawSumForDebitCard = BigDecimal.valueOf(-2000);
-        String expectedMessage = "It was a negative sum value!!!";
+        String expectedMessage = "It was a negative input value!!!";
         // when
-        Exception exception = assertThrows(NegativeSumInputException.class, () -> {
+        Exception exception = assertThrows(NegativeInputException.class, () -> {
             megaVisaGold.withdrawBalance(withdrawSumForDebitCard);
         });
         String actualMessage = exception.getMessage();
@@ -101,9 +101,9 @@ class AtmTest {
     void addCreditCard_NegativeSumInput_Exception() {
         // given
         BigDecimal addSumForCreditCard = BigDecimal.valueOf(-1000);
-        String expectedMessage = "It was a negative sum value!!!";
+        String expectedMessage = "It was a negative input value!!!";
         // when
-        Exception exception = assertThrows(NegativeSumInputException.class, () -> {
+        Exception exception = assertThrows(NegativeInputException.class, () -> {
             superVisaGold.withdrawBalance(addSumForCreditCard);
         });
         String actualMessage = exception.getMessage();
@@ -115,9 +115,9 @@ class AtmTest {
     void addDebitCard_NegativeSumInput_Exception() {
         // given
         BigDecimal addSumForDebitCard = BigDecimal.valueOf(-1000);
-        String expectedMessage = "It was a negative sum value!!!";
+        String expectedMessage = "It was a negative input value!!!";
         // when
-        Exception exception = assertThrows(NegativeSumInputException.class, () -> {
+        Exception exception = assertThrows(NegativeInputException.class, () -> {
             megaVisaGold.withdrawBalance(addSumForDebitCard);
         });
         String actualMessage = exception.getMessage();

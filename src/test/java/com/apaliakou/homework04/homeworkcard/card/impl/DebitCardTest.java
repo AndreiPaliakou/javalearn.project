@@ -2,8 +2,7 @@ package com.apaliakou.homework04.homeworkcard.card.impl;
 
 import com.apaliakou.homework04.homeworkcard.card.Card;
 import com.apaliakou.homework04.homeworkcard.exception.NegativeBalanceAfterWithdrawingException;
-import com.apaliakou.homework04.homeworkcard.exception.NegativeCoefficientInputException;
-import com.apaliakou.homework04.homeworkcard.exception.NegativeSumInputException;
+import com.apaliakou.homework04.homeworkcard.exception.NegativeInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
@@ -34,9 +33,9 @@ class DebitCardTest {
     public void withdraw_NegativeSumInput_Exception() {
         // given
         BigDecimal withdrawSumForDebitCard = BigDecimal.valueOf(-1200);
-        String expectedMessage = "It was a negative sum value!!!";
+        String expectedMessage = "It was a negative input value!!!";
         // when
-        Exception exception = assertThrows(NegativeSumInputException.class, () -> {
+        Exception exception = assertThrows(NegativeInputException.class, () -> {
             visaGold.withdrawBalance(withdrawSumForDebitCard);
         });
         String actualMessage = exception.getMessage();
@@ -63,9 +62,9 @@ class DebitCardTest {
     public void currencyConverter_NegativeCoefficientInput_Exception() {
         // given
         Double coefficientEnter = - 75.0;
-        String expectedMessage = "It was a negative currency coefficient value!!!";
+        String expectedMessage = "It was a negative input value!!!";
         // when
-        Exception exception = assertThrows(NegativeCoefficientInputException.class, () -> {
+        Exception exception = assertThrows(NegativeInputException.class, () -> {
             visaGold.currencyConverter(coefficientEnter);
         });
         String actualMessage = exception.getMessage();

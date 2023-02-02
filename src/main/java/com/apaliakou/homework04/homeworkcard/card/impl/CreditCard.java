@@ -12,12 +12,4 @@ public class CreditCard extends Card {
     public CreditCard(String holderName) {
         super(holderName);
     }
-
-    @Override
-    public Card withdrawBalance(BigDecimal withdrawSum) {
-        checkInputSumForNegativity(withdrawSum);
-        return super.withdrawBalance(withdrawSum);
-    }
-
-
 }

@@ -1,13 +1,11 @@
 package com.apaliakou.homework04.homeworkcard.card;
 
-import com.apaliakou.homework04.homeworkcard.exception.NegativeCoefficientInputException;
-import com.apaliakou.homework04.homeworkcard.exception.NegativeSumInputException;
+import com.apaliakou.homework04.homeworkcard.exception.NegativeInputException;
 import java.math.BigDecimal;
 
 public abstract class Card {
-    protected static final String NEGATIVE_INPUT_SUM_MESSAGE = "It was a negative sum value!!!";
-    protected static final String NEGATIVE_COEFFICIENT_INPUT_MESSAGE = "It was a negative currency " +
-            "coefficient value!!!";
+    protected static final String NEGATIVE_INPUT_MESSAGE = "It was a negative input value!!!";
+
     protected static final String NEGATIVE_BALANCE_MESSAGE = "The negative balance is not allowed!!! " +
             "The operation is forbidden!!!";
 
@@ -33,20 +31,20 @@ public abstract class Card {
     }
 
     public Card addBalance(BigDecimal addSum) {
-        checkInputSumForNegativity(addSum);
+        verifyIfNegative(addSum);
         this.balance = this.balance.add(addSum);
         return this;
     }
 
     public Card withdrawBalance(BigDecimal withdrawSum) {
-        checkInputSumForNegativity(withdrawSum);
+        verifyIfNegative(withdrawSum);
         this.balance = this.balance.subtract(withdrawSum);
         return this;
     }
 
     public BigDecimal currencyConverter(Double coefficientEnter) {
-        checkCoefficientForNegativity(coefficientEnter);
         BigDecimal coefficientConversion = new BigDecimal(coefficientEnter);
+        verifyIfNegative(coefficientConversion);
         return balance.multiply(coefficientConversion);
     }
 
@@ -54,15 +52,9 @@ public abstract class Card {
         return checkedSum.compareTo(new BigDecimal("0")) >= 0;
     }
 
-    protected void checkInputSumForNegativity(BigDecimal enteredSum) {
+    protected void verifyIfNegative(BigDecimal enteredSum) {
         if (enteredSum.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new NegativeSumInputException(NEGATIVE_INPUT_SUM_MESSAGE);
-        }
-    }
-
-    private void checkCoefficientForNegativity(Double enteredCoefficient) {
-        if (enteredCoefficient <= 0) {
-            throw new NegativeCoefficientInputException(NEGATIVE_COEFFICIENT_INPUT_MESSAGE);
+            throw new NegativeInputException(NEGATIVE_INPUT_MESSAGE);
         }
     }
 }

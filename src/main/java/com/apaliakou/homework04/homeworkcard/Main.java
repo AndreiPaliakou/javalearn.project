@@ -45,12 +45,12 @@ public class Main {
         Atm debitAtm = new Atm(debitCard);
 
         creditAtm.withdraw(new BigDecimal("400"));
-        System.out.println("The credit card balance on the Atm after the withdrawing: " + creditAtm.getBalance() + ".");
+        System.out.println("The credit card balance on the Atm after the withdrawing: " + creditAtm.getCardBalance() + ".");
 
         System.out.println();
 
         debitAtm.withdraw(new BigDecimal("400"));
-        System.out.println("The debit card balance on the Atm after the withdrawing: " + debitAtm.getBalance() + ".");
+        System.out.println("The debit card balance on the Atm after the withdrawing: " + debitAtm.getCardBalance() + ".");
 
     }
 }

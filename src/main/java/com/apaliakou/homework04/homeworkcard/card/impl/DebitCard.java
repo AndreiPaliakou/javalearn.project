@@ -16,7 +16,6 @@ public class DebitCard extends Card {
 
     @Override
     public Card withdrawBalance(BigDecimal withdrawSum) {
-        checkInputSumForNegativity(withdrawSum);
         checkNegativeBalance(withdrawSum);
         return super.withdrawBalance(withdrawSum);
     }
