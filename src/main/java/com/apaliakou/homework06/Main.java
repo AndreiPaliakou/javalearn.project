@@ -12,10 +12,9 @@ public class Main {
         text = removePunctuations(text);
         System.out.println("An initial string without the punctuation: \n" + text + "\n");
         ArrayList<String> list = new ArrayList<>(Arrays.asList(text.split(" ")));
-        System.out.println("After the substring division and ArrayList including: \n" + list + "\n");
+        System.out.println("After the separate string division and ArrayList including: \n" + list + "\n");
         list.sort(String.CASE_INSENSITIVE_ORDER);
         System.out.println("After the ArrayList alphabet sorting: \n" + list + "\n");
-        shortenArrayList(list);
         shortenArrayList(list);
     }
 }

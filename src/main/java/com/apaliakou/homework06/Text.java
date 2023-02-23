@@ -30,22 +30,23 @@ public class Text {
     }
 
     public static void shortenArrayList(ArrayList<String> list) {
-        ArrayList<String> subList = new ArrayList<>();
-        ArrayList<String> subList1 = new ArrayList<>();
-        ArrayList<String> subList2 = new ArrayList<>();
         int i;
-        for (i = 0; i < list.size(); i++) {
-            if (list.get(i).equals(list.get(i + 1))) {
-                subList.add(list.get(i));1
-            } else {
-                subList1.add(list.get(1));
-                subList2.add(list.get(0));
+        ArrayList<String> suppList = new ArrayList<>();
+        for (i = 1; i < list.size(); i++) {
+            if (list.get(i).equals(list.get(i - 1))) {
+                suppList.add(list.get(i - 1));
             }
         }
-        subList.add(list.get(1));
-        System.out.println(subList);
-        System.out.println(list.get(1).toUpperCase() + ": " + subList.get(1) + " " + subList.size());
-        list.removeAll(subList);
-        System.out.println(list);
+        suppList.add(list.get(0));
+        System.out.println("The new suppList: " + suppList); // it can be to be deleted
+        System.out.println(list.get(0).toUpperCase().charAt(0) + ": " + suppList.get(0) + " " + suppList.size());
+        list.removeAll(suppList);
+        System.out.println(list); // it can be to be deleted
+        System.out.println();
+
+        for (int j = 0; j < list.size(); j++){
+            shortenArrayList(list);
+        }
     }
 }
+
