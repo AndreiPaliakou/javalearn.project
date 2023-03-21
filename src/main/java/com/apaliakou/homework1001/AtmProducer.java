@@ -2,7 +2,7 @@ package com.apaliakou.homework1001;
 
 import java.math.BigDecimal;
 
-public class AtmProducer extends Atm {
+public class AtmProducer extends Atm implements Runnable {
 
     private String addAtmName;
 
@@ -30,6 +30,4 @@ public class AtmProducer extends Atm {
         System.out.println("Atm name - " + getAddAtmName() + ", card name - " +
                 getCard().getCardName() + ", card balance - " + getCard().getCardBalance() + ".");
     }
-
-
 }

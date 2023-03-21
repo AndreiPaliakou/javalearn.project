@@ -28,7 +28,15 @@ public class Card {
         boolean lessThenZero = cardBalance.compareTo(new BigDecimal("0")) <= 0;
         boolean moreThenThousand = cardBalance.compareTo(new BigDecimal("1000")) >= 0;
         if (lessThenZero || moreThenThousand) {
-            Thread.currentThread().interrupt();
+            try {
+                Thread.currentThread().interrupt();
+                if (Thread.currentThread().isInterrupted()) {
+                    System.out.println("The card balance " + cardBalance + " is unacceptable!!! So.....");
+                }
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         } else {
             this.cardBalance = cardBalance;
         }

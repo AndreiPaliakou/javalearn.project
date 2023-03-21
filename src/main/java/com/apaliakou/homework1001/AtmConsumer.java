@@ -2,7 +2,7 @@ package com.apaliakou.homework1001;
 
 import java.math.BigDecimal;
 
-public class AtmConsumer extends Atm {
+public class AtmConsumer extends Atm implements Runnable {
 
     private String subtractAtmName;
 

@@ -4,10 +4,11 @@ import com.apaliakou.homework1001.Exceptions.AddSumRangeException;
 
 import java.math.BigDecimal;
 
-
 public abstract class Atm implements Runnable {
 
     private Card card;
+
+    public static boolean isStopped = false;
 
     public Atm(Card card) {
         this.card = card;
@@ -21,11 +22,12 @@ public abstract class Atm implements Runnable {
         this.card = card;
     }
 
-    public abstract Atm operation(BigDecimal operationSum);
+    public abstract Atm operation (BigDecimal sum);
 
     public static BigDecimal generateRandomSum(int minAddSum, int maxAddSum) {
         if (minAddSum >= 25 && maxAddSum <= 50) {
             int randomResult = (int) ((Math.random() * (maxAddSum - minAddSum)) + minAddSum);
+            System.out.println("Current random number - " + randomResult);
             return new BigDecimal(randomResult);
         }
         String ADD_SUM_RANGE_EXCEPTION = "Add sum must be from 25 to 50 int type value range!";
@@ -34,15 +36,23 @@ public abstract class Atm implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            try {
-                operation(generateRandomSum(25, 50));
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-                return;
+        synchronized (card) {
+            while (!isStopped) {
+                try {
+                    System.out.println(Thread.currentThread().getName());
+                    operation(generateRandomSum(25, 50));
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                    isStopped = true;
+                }
             }
+        }
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }
