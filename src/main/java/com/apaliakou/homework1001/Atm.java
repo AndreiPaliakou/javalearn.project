@@ -22,9 +22,9 @@ public abstract class Atm implements Runnable {
         this.card = card;
     }
 
-    public abstract Atm operation (BigDecimal sum);
+    public abstract Atm operation(BigDecimal sum) throws InterruptedException;
 
-    public static BigDecimal generateRandomSum(int minAddSum, int maxAddSum) {
+    public BigDecimal generateRandomSum(int minAddSum, int maxAddSum) {
         if (minAddSum >= 25 && maxAddSum <= 50) {
             int randomResult = (int) ((Math.random() * (maxAddSum - minAddSum)) + minAddSum);
             System.out.println("Current random number - " + randomResult);
@@ -36,21 +36,28 @@ public abstract class Atm implements Runnable {
 
     @Override
     public void run() {
-        synchronized (card) {
-            while (!isStopped) {
-                try {
-                    System.out.println(Thread.currentThread().getName());
-                    operation(generateRandomSum(25, 50));
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
-                    isStopped = true;
+        while (!isStopped) {
+            synchronized (card) {
+                if (!isStopped) {
+                    try {
+                        System.out.println(Thread.currentThread().getName());
+                        operation(generateRandomSum(25, 50));
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
+                        e.printStackTrace();
+                        isStopped = true;
+                    }
+                } else {
+                    Thread.currentThread().interrupt();
+                    if(Thread.currentThread().isInterrupted()) {
+                        System.out.println("THE NEXT THREAD WAS STOPPED!!!");
+                    }
                 }
             }
         }
         try {
-            Thread.sleep(500);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

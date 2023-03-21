@@ -9,12 +9,6 @@ public class Main {
 
         Card visa = new Card("PLATINUM", new BigDecimal(500));
 
-        AtmProducer atmProducer = new AtmProducer(visa, "moneyProducer");
-        AtmConsumer atmConsumer = new AtmConsumer(visa, "moneyConsumer");
-
-        atmProducer.getAtmAddInfo();
-        atmConsumer.getAtmSubtractInfo();
-
         Thread addAtm1 = new Thread(new AtmProducer(visa, "moneyProducer"));
         Thread addAtm2 = new Thread(new AtmProducer(visa, "moneyProducer"));
         Thread addAtm3 = new Thread(new AtmProducer(visa, "moneyProducer"));
@@ -45,12 +39,12 @@ public class Main {
 
 //        ExecutorService executor = Executors.newFixedThreadPool(6);
 //
-//       for (int i = 0; i < 3; i++) {
+//        for (int i = 0; i < 3; i++) {
 //            executor.execute(new AtmProducer(visa, "moneyProducer"));
 //        }
 //
 //        for (int i = 0; i < 3; i++) {
 //            executor.execute(new AtmConsumer(visa, "moneyConsumer"));
-//        }
+//
     }
 }

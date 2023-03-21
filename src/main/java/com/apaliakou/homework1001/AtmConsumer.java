@@ -2,7 +2,7 @@ package com.apaliakou.homework1001;
 
 import java.math.BigDecimal;
 
-public class AtmConsumer extends Atm implements Runnable {
+public class AtmConsumer extends Atm {
 
     private String subtractAtmName;
 
@@ -19,7 +19,7 @@ public class AtmConsumer extends Atm implements Runnable {
         this.subtractAtmName = subtractAtmName;
     }
 
-    public Atm operation(BigDecimal subtractSum) {
+    public Atm operation(BigDecimal subtractSum) throws InterruptedException {
         BigDecimal result = getCard().getCardBalance().subtract(subtractSum);
         getCard().setCardBalance(result);
         System.out.println(getCard().getCardBalance() + "Method subtract");
