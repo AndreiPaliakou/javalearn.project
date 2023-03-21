@@ -1,6 +1,6 @@
-package com.apaliakou.homework1001;
+package com.apaliakou.homework10;
 
-import com.apaliakou.homework1001.Exceptions.AddSumRangeException;
+import com.apaliakou.homework10.Exceptions.AddSumRangeException;
 
 import java.math.BigDecimal;
 

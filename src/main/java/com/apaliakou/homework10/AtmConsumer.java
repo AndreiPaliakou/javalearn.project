@@ -1,4 +1,4 @@
-package com.apaliakou.homework1001;
+package com.apaliakou.homework10;
 
 import java.math.BigDecimal;
 

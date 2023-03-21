@@ -1,4 +1,4 @@
-package com.apaliakou.homework1001.Exceptions;
+package com.apaliakou.homework10.Exceptions;
 
 public class AddSumRangeException extends RuntimeException {
 

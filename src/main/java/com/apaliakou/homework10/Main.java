@@ -1,8 +1,6 @@
-package com.apaliakou.homework1001;
+package com.apaliakou.homework10;
 
 import java.math.BigDecimal;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) {
