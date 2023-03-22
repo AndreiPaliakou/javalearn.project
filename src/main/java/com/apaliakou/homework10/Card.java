@@ -1,11 +1,14 @@
 package com.apaliakou.homework10;
 
 import java.math.BigDecimal;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Card {
 
     private String cardName;
     private BigDecimal cardBalance;
+
+    public static final AtomicBoolean flag = new AtomicBoolean(true);
 
     public Card(String cardName, BigDecimal cardBalance) {
         this.cardName = cardName;
@@ -20,25 +23,25 @@ public class Card {
         this.cardName = cardName;
     }
 
-    public BigDecimal getCardBalance() {
+    public synchronized BigDecimal getCardBalance() {
         return cardBalance;
     }
 
-    public void setCardBalance(BigDecimal cardBalance) {
-        boolean lessThenZero = cardBalance.compareTo(new BigDecimal("0")) <= 0;
-        boolean moreThenThousand = cardBalance.compareTo(new BigDecimal("1000")) >= 0;
-        if (lessThenZero || moreThenThousand) {
-            try {
-                Thread.currentThread().interrupt();
-                if (Thread.currentThread().isInterrupted()) {
-                    System.out.println("The card balance " + cardBalance + " is unacceptable!!! So.....");
-                }
-            } catch (RuntimeException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            this.cardBalance = cardBalance;
-        }
+    public synchronized void setCardBalance(BigDecimal cardBalance) {
+        this.cardBalance = cardBalance;
+    }
+
+    public synchronized void add(BigDecimal addSum) {
+        setCardBalance(getCardBalance().add(addSum));
+        System.out.println(Thread.currentThread().getName() +
+                ",\t\t add sum: \t\t" + addSum +
+                ",\t\t current balance: \t" + this.cardBalance);
+    }
+
+    public synchronized void subtract(BigDecimal subtractSum) {
+        setCardBalance(getCardBalance().subtract(subtractSum));
+        System.out.println(Thread.currentThread().getName() +
+                ",\t\t subtract sum: \t" + subtractSum +
+                ",\t\t current balance: \t" + this.cardBalance);
     }
 }

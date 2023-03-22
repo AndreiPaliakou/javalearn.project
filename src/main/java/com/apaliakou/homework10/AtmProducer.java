@@ -19,15 +19,14 @@ public class AtmProducer extends Atm {
         this.addAtmName = addAtmName;
     }
 
-    public Atm operation(BigDecimal addSum) throws InterruptedException {
-        BigDecimal result = getCard().getCardBalance().add(addSum);
-        getCard().setCardBalance(result);
-        System.out.println(getCard().getCardBalance() + "Method add");
-        return this;
-    }
-
-    public void getAtmAddInfo() {
-        System.out.println("Atm name - " + getAddAtmName() + ", card name - " +
-                getCard().getCardName() + ", card balance - " + getCard().getCardBalance() + ".");
+    public void operation(BigDecimal operationSum) {
+        if (card.getCardBalance().add(operationSum).compareTo(new BigDecimal(1000)) > 0) {
+            BigDecimal exceeding = new BigDecimal(1000).subtract(card.getCardBalance());
+            card.add(exceeding);
+            Card.flag.set(false);
+            System.out.println("Program is finished with thread: " + Thread.currentThread().getName());
+        } else {
+            card.add(operationSum);
+        }
     }
 }

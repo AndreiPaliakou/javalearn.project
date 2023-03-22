@@ -3,12 +3,11 @@ package com.apaliakou.homework10;
 import com.apaliakou.homework10.Exceptions.AddSumRangeException;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
-public abstract class Atm implements Runnable {
+public abstract class Atm extends Thread {
 
-    private Card card;
-
-    public static boolean isStopped = false;
+    Card card;
 
     public Atm(Card card) {
         this.card = card;
@@ -22,12 +21,11 @@ public abstract class Atm implements Runnable {
         this.card = card;
     }
 
-    public abstract Atm operation(BigDecimal sum) throws InterruptedException;
+    public abstract void operation(BigDecimal operationSum);
 
     public BigDecimal generateRandomSum(int minAddSum, int maxAddSum) {
         if (minAddSum >= 25 && maxAddSum <= 50) {
             int randomResult = (int) ((Math.random() * (maxAddSum - minAddSum)) + minAddSum);
-            System.out.println("Current random number - " + randomResult);
             return new BigDecimal(randomResult);
         }
         String ADD_SUM_RANGE_EXCEPTION = "Add sum must be from 25 to 50 int type value range!";
@@ -36,30 +34,13 @@ public abstract class Atm implements Runnable {
 
     @Override
     public void run() {
-        while (!isStopped) {
-            synchronized (card) {
-                if (!isStopped) {
-                    try {
-                        System.out.println(Thread.currentThread().getName());
-                        operation(generateRandomSum(25, 50));
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        System.out.println(e.getMessage());
-                        e.printStackTrace();
-                        isStopped = true;
-                    }
-                } else {
-                    Thread.currentThread().interrupt();
-                    if(Thread.currentThread().isInterrupted()) {
-                        System.out.println("THE NEXT THREAD WAS STOPPED!!!");
-                    }
-                }
+        while (Card.flag.get()) {
+            operation(generateRandomSum(25, 50));
+            try {
+                sleep(new Random().nextInt(1000) + 500L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 }

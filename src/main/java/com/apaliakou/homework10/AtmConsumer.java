@@ -19,15 +19,14 @@ public class AtmConsumer extends Atm {
         this.subtractAtmName = subtractAtmName;
     }
 
-    public Atm operation(BigDecimal subtractSum) throws InterruptedException {
-        BigDecimal result = getCard().getCardBalance().subtract(subtractSum);
-        getCard().setCardBalance(result);
-        System.out.println(getCard().getCardBalance() + "Method subtract");
-        return this;
-    }
-
-    public void getAtmSubtractInfo() {
-        System.out.println("Atm name - " + getSubtractAtmName() + ", card name - " +
-                getCard().getCardName() + ", card balance - " + getCard().getCardBalance() + ".");
+    public void operation(BigDecimal operationSum) {
+        BigDecimal currentBalance = card.getCardBalance();
+        if (currentBalance.compareTo(operationSum) < 0) {
+            card.subtract(currentBalance);
+            Card.flag.set(false);
+            System.out.println("Program is finished with thread: " + Thread.currentThread().getName());
+        } else {
+            card.subtract(operationSum);
+        }
     }
 }
