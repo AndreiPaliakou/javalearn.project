@@ -23,11 +23,11 @@ public class Card {
         this.cardName = cardName;
     }
 
-    public synchronized BigDecimal getCardBalance() {
+    public BigDecimal getCardBalance() {
         return cardBalance;
     }
 
-    public synchronized void setCardBalance(BigDecimal cardBalance) {
+    public void setCardBalance(BigDecimal cardBalance) {
         this.cardBalance = cardBalance;
     }
 

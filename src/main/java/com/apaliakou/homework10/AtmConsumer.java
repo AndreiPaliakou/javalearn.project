@@ -19,10 +19,9 @@ public class AtmConsumer extends Atm {
         this.subtractAtmName = subtractAtmName;
     }
 
-    public void operation(BigDecimal operationSum) {
-        BigDecimal currentBalance = card.getCardBalance();
-        if (currentBalance.compareTo(operationSum) < 0) {
-            card.subtract(currentBalance);
+    public void operation(Card card, BigDecimal operationSum) {
+        if (card.getCardBalance().compareTo(operationSum) < 0) {
+            card.subtract(card.getCardBalance());
             Card.flag.set(false);
             System.out.println("Program is finished with thread: " + Thread.currentThread().getName());
         } else {

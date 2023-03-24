@@ -19,10 +19,9 @@ public class AtmProducer extends Atm {
         this.addAtmName = addAtmName;
     }
 
-    public void operation(BigDecimal operationSum) {
+    public void operation(Card card, BigDecimal operationSum) {
         if (card.getCardBalance().add(operationSum).compareTo(new BigDecimal(1000)) > 0) {
-            BigDecimal exceeding = new BigDecimal(1000).subtract(card.getCardBalance());
-            card.add(exceeding);
+            card.add(new BigDecimal(1000).subtract(card.getCardBalance()));
             Card.flag.set(false);
             System.out.println("Program is finished with thread: " + Thread.currentThread().getName());
         } else {

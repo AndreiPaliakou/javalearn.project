@@ -21,7 +21,7 @@ public abstract class Atm extends Thread {
         this.card = card;
     }
 
-    public abstract void operation(BigDecimal operationSum);
+    public abstract void operation(Card card, BigDecimal operationSum);
 
     public BigDecimal generateRandomSum(int minAddSum, int maxAddSum) {
         if (minAddSum >= 25 && maxAddSum <= 50) {
@@ -35,7 +35,7 @@ public abstract class Atm extends Thread {
     @Override
     public void run() {
         while (Card.flag.get()) {
-            operation(generateRandomSum(25, 50));
+            operation(card, generateRandomSum(25, 50));
             try {
                 sleep(new Random().nextInt(1000) + 500L);
             } catch (InterruptedException e) {
