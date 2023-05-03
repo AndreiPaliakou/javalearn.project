@@ -1,26 +1,22 @@
 package com.apaliakou.homework14.model.impl.urlConnection;
 
 import com.apaliakou.homework14.model.WebClient;
-import com.apaliakou.homework14.exceptions.PublicationIdException;
 import com.apaliakou.homework14.Publication;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+
+import org.apache.http.HttpHeaders;
 
 public class UrlConnection implements WebClient {
 
-    String PUBLICATION_ID_EXCEPTION = "This publication id already exists!!! Try again!!!";
+    private static HttpURLConnection connection;
 
     public static Long idScan() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the publication id: ");
-
         Long id;
         if (sc.hasNextLong()) {
             return id = sc.nextLong();
@@ -29,62 +25,56 @@ public class UrlConnection implements WebClient {
             return idScan();
         }
     }
+
     @Override
-    public void getPublicationById(Long id) {
+    public void getPublicationById(Long id) throws IOException {
         String urlAdressWithId = GET_ENDPOINT.concat("/" + id);
-        URLConnection urlConnection = null;
-        URL url = null;
-        InputStreamReader isR = null;
-        BufferedReader bfR = null;
+        URL url = new URL(urlAdressWithId);
         try {
-            url = new URL(urlAdressWithId);
-            urlConnection = url.openConnection();
-            isR = new InputStreamReader(urlConnection.getInputStream());
-            bfR = new BufferedReader(isR);
-            String line;
-            while ((line = bfR.readLine()) != null)
-                System.out.println(line);
-        } catch (IOException e) {
-            e.printStackTrace();
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setRequestProperty(HttpHeaders.ACCEPT, "application/json");
+            connection.setRequestProperty(HttpHeaders.CONTENT_TYPE, "application/json");
+            StringBuilder content;
+//            try (BufferedReader bfR = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+//                String line;
+//                content = new StringBuilder();
+//                while ((line = bfR.readLine()) != null) {
+//                    content.append(line);
+//                    content.append(System.lineSeparator());
+//                    System.out.println(line);
+//                }
+//                System.out.println(mapper.readValue("{ \"userId\" : \"1\", \"id\" : \"7\", \"title\" : \"dfasdf\", \"body\" : \"sdfdf\"  }", Publication.class));
+//            }
+            try (InputStream inputStream = connection.getInputStream()) {
+                System.out.println(mapper.readValue(inputStream, Publication.class));
+            }
         } finally {
-            try {
-                assert isR != null;
-                isR.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                assert bfR != null;
-                bfR.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            connection.disconnect();
         }
     }
+
 
     @Override
     public void postPublication(Publication newPublication, String jsonString) throws IOException {
         if (newPublication.getId() >= 101L) {
             URL url = new URL(POST_ENDPOINT);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/json");
-            con.setRequestProperty("Accept", "application/json");
-            con.setDoOutput(true);
-            try (OutputStream os = con.getOutputStream()) {
-                byte[] input = jsonString.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            try (DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream())) {
+                dataOutputStream.writeBytes(jsonString);
             }
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine = null;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
+            try (BufferedReader bR = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String line;
+                while ((line = bR.readLine()) != null) {
+                    System.out.println(mapper.readValue(line, Publication.class));
                 }
-                System.out.println(response);
+
             }
-        } else {
-            throw new PublicationIdException(PUBLICATION_ID_EXCEPTION);
         }
     }
 }

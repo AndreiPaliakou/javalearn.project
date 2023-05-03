@@ -13,6 +13,9 @@ public class Publication {
         this.body = body;
     }
 
+    public Publication() {
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -43,5 +46,15 @@ public class Publication {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    @Override
+    public String toString() {
+        return "Publication{" +
+                "userId=" + userId +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                '}';
     }
 }
