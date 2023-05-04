@@ -11,7 +11,7 @@ public interface WebClient {
 
     ObjectMapper mapper = new ObjectMapper();
 
-    void getPublicationById(Long id) throws IOException;
+    Publication getPublicationById(Long id) throws IOException;
 
-    void postPublication(Publication newPublication, String jsonString) throws IOException;
+    Publication postPublication(Publication newPublication, String jsonString) throws IOException;
 }
