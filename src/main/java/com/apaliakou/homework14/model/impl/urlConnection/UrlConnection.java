@@ -36,8 +36,8 @@ public class UrlConnection implements WebClient {
             httpUrlConnection.setRequestProperty(HttpHeaders.ACCEPT, "application/json");
             httpUrlConnection.setRequestProperty(HttpHeaders.CONTENT_TYPE, "application/json");
             int responseCode = httpUrlConnection.getResponseCode();
-            System.out.println("HttpGetRequest to URL : " + url + "\nResponse code : " + responseCode);
-            System.out.println("Response Body : ");
+            System.out.println("HttpGetRequest to URL: " + url + "\nResponse code: " + responseCode);
+            System.out.println("Response Body: ");
             InputStream inputStream = httpUrlConnection.getInputStream();
             return mapper.readValue(inputStream, Publication.class);
         } finally {
@@ -61,7 +61,7 @@ public class UrlConnection implements WebClient {
                 dataOutputStream.close();
                 int responseCode = httpUrlConnection.getResponseCode();
                 System.out.println("HttpPostRequest to URL : " + url + "\nResponse code : " + responseCode);
-                System.out.println("Response Body :\n ");
+                System.out.println("Response Body : ");
                 try (InputStream inputStream = httpUrlConnection.getInputStream()) {
                     return mapper.readValue(inputStream, Publication.class);
                 }
