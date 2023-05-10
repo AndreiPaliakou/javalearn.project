@@ -25,6 +25,7 @@ public class Main {
 
         HttpClientConnection httpClientConnection = new HttpClientConnection();
         System.out.println(httpClientConnection.getPublicationById(idScan()));
+        System.out.println();
         System.out.println(httpClientConnection.postPublication(newPublication, jsonString));
     }
 }
