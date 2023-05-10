@@ -36,6 +36,7 @@ public class UrlConnection implements WebClient {
             httpUrlConnection.setRequestProperty(HttpHeaders.ACCEPT, "application/json");
             httpUrlConnection.setRequestProperty(HttpHeaders.CONTENT_TYPE, "application/json");
             int responseCode = httpUrlConnection.getResponseCode();
+            System.out.println("Request Type: " + httpUrlConnection.getRequestMethod());
             System.out.println("HttpGetRequest to URL: " + url + "\nResponse code: " + responseCode);
             System.out.println("Response Body: ");
             InputStream inputStream = httpUrlConnection.getInputStream();
@@ -55,6 +56,7 @@ public class UrlConnection implements WebClient {
             httpUrlConnection.setRequestProperty(HttpHeaders.ACCEPT, "application/json");
             httpUrlConnection.setRequestProperty(HttpHeaders.CONTENT_TYPE, "application/json");
             httpUrlConnection.setDoOutput(true);
+            System.out.println("Request Type: " + httpUrlConnection.getRequestMethod());
             try (DataOutputStream dataOutputStream = new DataOutputStream(httpUrlConnection.getOutputStream())) {
                 dataOutputStream.writeBytes(jsonString);
                 dataOutputStream.flush();

@@ -10,6 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class HttpClientConnection implements WebClient {
 
@@ -20,6 +21,9 @@ public class HttpClientConnection implements WebClient {
             HttpGet httpGetRequest = new HttpGet(urlAsString);
             System.out.println("Request Type: " + httpGetRequest.getMethod());
             HttpResponse httpResponse = httpClient.execute(httpGetRequest);
+            System.out.println("HttpGetRequest to URL: " + httpGetRequest.getURI() +
+                    "\nResponse code: " + httpResponse.getStatusLine().getStatusCode());
+            System.out.println("Response Body: ");
             return mapper.readValue(httpResponse.getEntity().getContent(), Publication.class);
         }
     }
@@ -32,10 +36,12 @@ public class HttpClientConnection implements WebClient {
                 httpPostRequest.setEntity(new StringEntity(jsonString));
                 System.out.println("Request Type: " + httpPostRequest.getMethod());
                 HttpResponse httpResponse = httpClient.execute(httpPostRequest);
-                System.out.println("HttpGetRequest to URL: " + httpPostRequest.getURI() + "\nResponse code: "
-                        + httpResponse.getStatusLine().getStatusCode());
+                System.out.println("HttpPostRequest to URL: " + httpPostRequest.getURI() +
+                        "\nResponse code: " + httpResponse.getStatusLine().getStatusCode());
                 System.out.println("Response Body: ");
-                return mapper.readValue(httpResponse.getEntity().getContent(), Publication.class);
+                try (InputStream inputStream = httpResponse.getEntity().getContent()) {
+                    return mapper.readValue(inputStream, Publication.class);
+                }
             }
         }
         return null;
