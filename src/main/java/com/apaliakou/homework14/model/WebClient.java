@@ -13,5 +13,5 @@ public interface WebClient {
 
     Publication getPublicationById(Long id) throws IOException;
 
-    Publication postPublication(Publication newPublication, String jsonString) throws IOException;
+    Publication postPublication(String jsonString) throws IOException;
 }

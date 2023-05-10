@@ -48,29 +48,26 @@ public class UrlConnection implements WebClient {
 
 
     @Override
-    public Publication postPublication(Publication newPublication, String jsonString) throws IOException {
-        if (newPublication.getId() >= 101L) {
-            URL url = new URL(POST_ENDPOINT);
-            httpUrlConnection = (HttpURLConnection) url.openConnection();
-            httpUrlConnection.setRequestMethod("POST");
-            httpUrlConnection.setRequestProperty(HttpHeaders.ACCEPT, "application/json");
-            httpUrlConnection.setRequestProperty(HttpHeaders.CONTENT_TYPE, "application/json");
-            httpUrlConnection.setDoOutput(true);
-            System.out.println("Request Type: " + httpUrlConnection.getRequestMethod());
-            try (DataOutputStream dataOutputStream = new DataOutputStream(httpUrlConnection.getOutputStream())) {
-                dataOutputStream.writeBytes(jsonString);
-                dataOutputStream.flush();
-                dataOutputStream.close();
-                int responseCode = httpUrlConnection.getResponseCode();
-                System.out.println("HttpPostRequest to URL : " + url + "\nResponse code : " + responseCode);
-                System.out.println("Response Body : ");
-                try (InputStream inputStream = httpUrlConnection.getInputStream()) {
-                    return mapper.readValue(inputStream, Publication.class);
-                }
-            } finally {
-                httpUrlConnection.disconnect();
+    public Publication postPublication(String jsonString) throws IOException {
+        URL url = new URL(POST_ENDPOINT);
+        httpUrlConnection = (HttpURLConnection) url.openConnection();
+        httpUrlConnection.setRequestMethod("POST");
+        httpUrlConnection.setRequestProperty(HttpHeaders.ACCEPT, "application/json");
+        httpUrlConnection.setRequestProperty(HttpHeaders.CONTENT_TYPE, "application/json");
+        httpUrlConnection.setDoOutput(true);
+        System.out.println("Request Type: " + httpUrlConnection.getRequestMethod());
+        try (DataOutputStream dataOutputStream = new DataOutputStream(httpUrlConnection.getOutputStream())) {
+            dataOutputStream.writeBytes(jsonString);
+            dataOutputStream.flush();
+            dataOutputStream.close();
+            int responseCode = httpUrlConnection.getResponseCode();
+            System.out.println("HttpPostRequest to URL : " + url + "\nResponse code : " + responseCode);
+            System.out.println("Response Body : ");
+            try (InputStream inputStream = httpUrlConnection.getInputStream()) {
+                return mapper.readValue(inputStream, Publication.class);
             }
+        } finally {
+            httpUrlConnection.disconnect();
         }
-        return null;
     }
 }

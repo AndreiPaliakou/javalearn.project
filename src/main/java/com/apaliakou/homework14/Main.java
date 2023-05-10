@@ -14,19 +14,19 @@ public class Main {
 
         UrlConnection urlConnection = new UrlConnection();
 
-        Publication newPublication = new Publication(11L, 101L, "GOOD LUCK", "YOU ARE FOOL");
+        Publication newPublication = new Publication(11L, 200L, "GOOD LUCK", "YOU ARE FOOL");
         String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(newPublication);
 
         System.out.println(urlConnection.getPublicationById(idScan()));
         System.out.println();
-        System.out.println(urlConnection.postPublication(newPublication, jsonString));
+        System.out.println(urlConnection.postPublication(jsonString));
         System.out.println();
 
         HttpClientConnection httpClientConnection = new HttpClientConnection();
 
         System.out.println(httpClientConnection.getPublicationById(idScan()));
         System.out.println();
-        System.out.println(httpClientConnection.postPublication(newPublication, jsonString));
+        System.out.println(httpClientConnection.postPublication(jsonString));
 
         mapper.writeValue(new File("publication.json"), newPublication);
     }
