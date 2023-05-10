@@ -20,7 +20,7 @@ public class UrlConnection implements WebClient {
         if (sc.hasNextLong()) {
             return sc.nextLong();
         } else {
-            System.out.println("Long type error!!!");
+            System.out.println("Long type error(InputMismatchException!!! Enter the long type value!!!");
             return idScan();
         }
     }
