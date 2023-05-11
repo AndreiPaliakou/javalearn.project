@@ -14,7 +14,7 @@ public class Main {
 
         UrlConnection urlConnection = new UrlConnection();
 
-        Publication newPublication = new Publication(11L, 200L, "GOOD LUCK", "YOU ARE FOOL");
+        Publication newPublication = new Publication(11L, 200L, "GOOD LUCK", "YOU ARE CRAZY");
         String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(newPublication);
 
         System.out.println(urlConnection.getPublicationById(idScan()));
