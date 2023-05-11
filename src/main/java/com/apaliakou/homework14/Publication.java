@@ -1,6 +1,7 @@
 package com.apaliakou.homework14;
 
-public class Publication  {
+public class Publication {
+
     private Long userId;
     private Long id;
     private String title;

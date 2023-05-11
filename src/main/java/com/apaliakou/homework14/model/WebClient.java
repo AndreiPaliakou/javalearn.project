@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
+
 public interface WebClient {
     String GET_ENDPOINT = "http://jsonplaceholder.typicode.com/posts/";
     String POST_ENDPOINT = "http://jsonplaceholder.typicode.com/posts";

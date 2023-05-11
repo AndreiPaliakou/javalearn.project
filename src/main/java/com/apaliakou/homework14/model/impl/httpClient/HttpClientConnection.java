@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class HttpClientConnection implements WebClient {
 
+
     @Override
     public Publication getPublicationById(Long id) throws IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {

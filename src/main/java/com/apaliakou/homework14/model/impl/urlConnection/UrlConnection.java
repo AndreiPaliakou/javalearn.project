@@ -14,13 +14,14 @@ public class UrlConnection implements WebClient {
 
     private static HttpURLConnection httpUrlConnection;
 
+
     public static Long idScan() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the publication id: ");
         if (sc.hasNextLong()) {
             return sc.nextLong();
         } else {
-            System.out.println("Long type error(InputMismatchException!!! Enter the long type value!!!");
+            System.out.println("Long type error!!! Enter the long type value!!!");
             return idScan();
         }
     }
