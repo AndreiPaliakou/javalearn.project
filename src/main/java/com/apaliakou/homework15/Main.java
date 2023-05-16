@@ -2,12 +2,9 @@ package com.apaliakou.homework15;
 
 import com.apaliakou.homework15.model.User;
 import com.apaliakou.homework15.model.enums.Topic;
-import com.apaliakou.homework15.service.api.MessageCreator;
 import com.apaliakou.homework15.service.impl.MailSenderImpl;
-import com.apaliakou.homework15.service.impl.MailServiceImpl;
 import com.apaliakou.homework15.service.impl.MessageCreatorImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -26,7 +23,5 @@ public class Main {
         mailSenderImpl.sendMail(mail);
 
 
-
-        MailServiceImpl service = new MailServiceImpl();
     }
 }
