@@ -6,9 +6,9 @@ import java.util.Map;
 public interface MailService {
     void sendMessageAboutBug();
 
-    String sendFirstInvitation(User user);
+    String sendPersonalMessage(User user);
 
     void sendMeDummyMessagesForAllTopics();
 
-    Map<String, User> getDeveloperEmails();
+    Map<String, User> getUsersEmails();
 }

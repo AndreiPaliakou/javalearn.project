@@ -7,36 +7,15 @@ import java.util.List;
 
 public class MessageCreatorImpl implements MessageCreator {
 
-    private List<String> recipients;
-
-    private String theme;
-
-    public List<String> getRecipients() {
-        return recipients;
-    }
-
-    public void setRecipients(List<String> recipients) {
-        this.recipients = recipients;
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
     @Override
     public String createMessage(List<String> recipients, String theme) {
-        String newMessage = theme + System.lineSeparator() + recipients.stream().toString();
-        return newMessage;
+        return "The message text /" + theme + "/ was sent to the next mails: " + recipients.stream().toList();
     }
 
     @Override
     public String createPersonalMessage(User user, String theme) {
-        String newMessage = "Personal message for user: " + user.getFirstName() + " "
-                + user.getLastName() + System.lineSeparator() + theme;
-        return newMessage;
+        return "The personal message text for user / " + user.getFirstName() + " "
+                + user.getLastName() + " /: " + theme;
     }
 }
+

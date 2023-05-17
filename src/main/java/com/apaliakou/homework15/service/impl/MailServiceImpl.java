@@ -35,9 +35,9 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendMessageAboutBug() {
-        List<User> developers = userService.getDevelopers();
+        List<User> listOfUsers = userService.getAllUsers();
 
-        List<String> recipients = UserMailExtractor.getMailsFromUsers(developers);
+        List<String> recipients = UserMailExtractor.getMailsFromUsers(listOfUsers);
 
         checkRecipients(recipients);
 
@@ -47,7 +47,7 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public String sendFirstInvitation(User user) {
+    public String sendPersonalMessage(User user) {
         String personalMessage = messageCreator.createPersonalMessage(user, TASK.getText());
 
         mailSender.sendMail(personalMessage);
@@ -66,18 +66,18 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public Map<String, User> getDeveloperEmails() {
-        return userService.getDevelopers().stream()
+    public Map<String, User> getUsersEmails() {
+        return userService.getAllUsers().stream()
                 .collect(Collectors.toMap(User::getEmail, Function.identity()));
     }
 
     private void checkRecipients(List<String> recipients) {
         if (recipients.isEmpty()) {
-            throw new RecipientsException("Recipients list is empty.");
+            throw new RecipientsException("Recipients list is empty!!!");
         }
     }
 
-    private Set<String> getMessagesForUser(User currentUser) {
+    public Set<String> getMessagesForUser(User currentUser) {
         return Arrays.stream(Topic.values())
                 .map(Topic::getText)
                 .map(text -> messageCreator.createPersonalMessage(currentUser, text))

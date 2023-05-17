@@ -16,6 +16,6 @@ private String mail;
 
     @Override
     public void sendMail(String mail) {
-        System.out.println("The mail " + mail + " was successfully sent!!!");
+        System.out.println(mail);
     }
 }
