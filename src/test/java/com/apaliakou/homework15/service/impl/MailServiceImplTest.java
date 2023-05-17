@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,6 +48,7 @@ public class MailServiceImplTest {
         map.put(user2.getEmail(), user2);
         map.put(user3.getEmail(), user3);
         Map<String, User> expectedMap = map;
-        Mockito.when(userServiceImplMock.getAllUsers().stream().map(Mockito.any(User.class)).thenReturn(expectedMap));
+        Mockito.when(userServiceImplMock.getAllUsers()).thenReturn((List<User>) expectedMap);
+        assertThat(actualPersonalMessage).isEqualTo(expectedMap);
     }
 }
