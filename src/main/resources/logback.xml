@@ -1,0 +1,26 @@
+<configuration
+    debug="true" scan="true" scanPeriod="30 seconds">
+
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] [%level] %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_FOR_LOGGER" class="ch.qos.logback.core.FileAppender">
+        <file>C:\Users\37529\IdeaProjects\javalearn.project\src\main\myLogFile.log</file>
+        <encoder>
+            <pattern>%d %logger{10} %level [%thread] [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.apaliakou.homework15.Main" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="FILE_FOR_LOGGER"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

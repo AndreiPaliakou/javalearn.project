@@ -6,6 +6,8 @@ import com.apaliakou.homework15.service.impl.MailServiceImpl;
 import com.apaliakou.homework15.service.impl.MessageCreatorImpl;
 import com.apaliakou.homework15.service.impl.UserServiceImpl;
 import com.apaliakou.homework15.util.UserMailExtractor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,9 @@ import java.util.Set;
 import static com.apaliakou.homework15.model.enums.Topic.BUG;
 import static com.apaliakou.homework15.model.enums.Topic.TASK;
 
+
 public class Main {
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 // void sendMessageAboutBug() method simulation
         UserServiceImpl userServiceImpl = new UserServiceImpl();
@@ -49,5 +53,11 @@ public class Main {
 // getDeveloperEmails() method simulation
         Map<String, User> map = mailServiceImpl.getUsersEmails();// get the map with "mail - user" pairs
         map.forEach((key, value) -> System.out.println(key + "\t: " + value.getFirstName() + " " + value.getLastName()));
+
+        System.out.println();
+
+        logger.debug("Debug log message");
+        logger.info("Info log message");
+        logger.error("Error log message");
     }
 }
