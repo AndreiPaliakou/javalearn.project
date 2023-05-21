@@ -19,7 +19,7 @@ import static com.apaliakou.homework15.model.enums.Topic.TASK;
 
 
 public class Main {
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 // void sendMessageAboutBug() method simulation
         UserServiceImpl userServiceImpl = new UserServiceImpl();
