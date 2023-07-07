@@ -9,17 +9,17 @@
 <h1>Hello (userName)!</h1>
 <h2>Make your order:</h2>
 <br>
-<form action="/shopPage3" method="POST">
-    <select products="setOfTheProducts" selectAnyoneProducts>
+<form action="shopPage3" method="POST">
+    <select name="setOfTheProducts" multiple>
         <option value="Book">Book (5,5$)</option>
         <option value="Pen">Pen (1,1$)</option>
         <option value="Pencil">Pencil (3,3$)</option>
         <option value="Copybook">Copybook (2,2$)</option>
     </select>
     <br>
-    <input type="text" selectedProducts="selectedProducts" value></input>
+    <input type="text" name="userName" value = (userName) hidden</input>
     <br>
-    <button formNoValidate type="Submit" Press the button></button>
+    <input type="submit" value="ENTER">
 </form>
 </body>
 </html>

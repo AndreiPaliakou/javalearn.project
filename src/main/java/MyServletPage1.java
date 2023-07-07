@@ -4,27 +4,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 
 
 @WebServlet(urlPatterns = {"/"})
 public class MyServletPage1 extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().println("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>ShopPage1</title>\n" +
-                "    <style> body{text-align: center;} </style>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<h1>Welcome to Online Shop!!!</h1>\n" +
-                "<form action=\"/shopPage2\" method=\"POST\">\n" +
-                "    <input type=\"text\" userName=\"Entered name\" Enter your name></input>\n" +
-                "    <br><br>\n" +
-                "    <button formNoValidate type=\"Press the button\"> Enter</button>\n" +
-                "</form>\n" +
-                "</body>\n" +
-                "</html>");
+        byte[] result = new byte[64 * 1024];
+
+        try (InputStream stream = getClass().getClassLoader().getResourceAsStream("informationToTheServerFromPage1.html")) {
+            stream.read(result);
+
+            String resultAsString = new String(result, Charset.forName("UTF-8"));
+
+            response.getWriter().print(resultAsString);
+        }
     }
 }

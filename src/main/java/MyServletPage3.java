@@ -12,11 +12,11 @@ import java.util.Map;
 public class MyServletPage3 extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = req.getParameter("Entered name");
+        String userName = request.getParameter("userName");
         StringBuilder orderAsString = new StringBuilder();
         Double totalPrice = 0.0;
         int i = 1;
-        String[] products = req.getParameterValues("selectedProducts");
+        String[] products = request.getParameterValues("setOfTheProducts");
 
         Map<String, Double> productsMap = new HashMap<String, Double>();
         productsMap.put("Book", 5.0);
@@ -25,7 +25,7 @@ public class MyServletPage3 extends HttpServlet {
         productsMap.put("Copybook", 2.2);
 
         for (String product : products) {
-            if (!productsMap.containsKey(products)) {
+            if (!productsMap.containsKey(product)) {
                 orderAsString.append(String.format("No such product", product));
                 continue;
             }
@@ -41,7 +41,7 @@ public class MyServletPage3 extends HttpServlet {
                 "    <style> body{text-align: center;} </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "<h1>Dear" + userName, + "your order:</h1>\n" +
+                "<h1>Dear " + userName + " your order:</h1>\n" +
                 orderAsString + "\n" +
                 "<h2>Total:</h2>" + totalPrice + " $: \n" +
                 "</body>\n" +
