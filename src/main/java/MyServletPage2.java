@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 @WebServlet(urlPatterns = {"/shopPage2"})
 public class MyServletPage2 extends HttpServlet {
     @Override

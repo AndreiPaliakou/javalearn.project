@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @WebServlet(urlPatterns = {"/shopPage3"})
 public class MyServletPage3 extends HttpServlet {
     @Override
