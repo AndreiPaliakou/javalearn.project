@@ -6,7 +6,8 @@
     <style> body{text-align: center;} </style>
 </head>
 <body>
-<h1>Hello (userName)!</h1>
+<h1>Hello ${value}!</h1>
+${complex_value}
 <h2>Make your order:</h2>
 <br>
 <form action="shopPage3" method="POST">
@@ -16,9 +17,11 @@
         <option value="Pencil">Pencil (3,3$)</option>
         <option value="Copybook">Copybook (2,2$)</option>
     </select>
+    <br/>
     <button formaction="shopPage2">Add Item</button>
-    <input type="text" name="userName" value = userName hidden>
-    <input type="submit" value="Submit">
+    <input type="submit" value="ENTER">
+    <br/>
+    <input type="text" name="userName" value = "${value}" hidden>    
 </form>
 </body>
 </html>

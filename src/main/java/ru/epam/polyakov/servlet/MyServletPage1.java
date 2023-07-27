@@ -1,15 +1,21 @@
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.*;
-import java.nio.charset.Charset;
+package ru.epam.polyakov.servlet;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(urlPatterns = {"/"})
 public class MyServletPage1 extends HttpServlet {
+	private static final long serialVersionUID = 2501318350481995851L;
 
-    @Override
+	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         byte[] result = new byte[64 * 1024];
 
